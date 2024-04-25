@@ -64,11 +64,11 @@ fun LoginScreen(onCambiarVentana: () -> Unit) {
                 visibilidad = it
             }
             Boton(buttonEnabled) {
-                if (!comprobrarLogin(usuario, contra)) error = true
+                error = if (!comprobrarLogin(usuario, contra)) true
                 else {
                     onCambiarVentana()
                     guardarLogs()
-                    error = false
+                    false
                 }
                 usuario = ""
                 contra = ""
