@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,20 +20,22 @@ import androidx.compose.ui.window.application
 @Composable
 fun MainScreen() {
     val students = remember { mutableStateListOf("Juan", "Victor", "Esther", "Jaime") }
+
     Surface(
         color = Color.LightGray,
         modifier = Modifier.fillMaxSize()
     ) {
-        StudentList(students) {
+        StudentList(students, {students.clear()}) {
             students.add("Miguel")
         }
     }
 }
 
 
+
 @Composable
 @Preview
-fun StudentList(students: List<String>, onButtonClick: () -> Unit) {
+fun StudentList(students: List<String>, onClearAll: () -> Unit, onButtonClick: () -> Unit) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -80,7 +83,7 @@ fun StudentList(students: List<String>, onButtonClick: () -> Unit) {
                         }
 
                     }
-                    Button(onClick = onButtonClick) {
+                    Button(onClick = onClearAll) {
                         Text(text = "Clear All")
                     }
 
